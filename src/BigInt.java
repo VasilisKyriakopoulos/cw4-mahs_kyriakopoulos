@@ -51,4 +51,42 @@ public class BigInt  {
         }
          
     }
+    public static BigInt add(BigInt a, BigInt b){
+        Integer carry = 0;
+        Integer tmp;
+        String bigint = "";
+        Integer size1 = a.countDigits();
+        Integer size2 = b.countDigits();
+        if(size1>size2){
+            for(int i=0;i<size1;i++){
+                if(i<size2){
+                    tmp = a.getList().get(i)+ b.getList().get(i)+carry;
+                    }
+                else{
+                    tmp = a.getList().get(i)+carry;
+                }
+                if(tmp>9){
+                    carry = tmp/10;
+                       
+                }
+                bigint = tmp % 10 + bigint;
+            }
+        }
+        else{
+                for(int i=0;i<size2;i++){
+                    if(i<size1){
+                        tmp = a.getList().get(i)+ b.getList().get(i)+carry;
+                        }
+                    else{
+                        tmp = b.getList().get(i)+carry;
+                    }
+                    if(tmp>9){
+                    carry = tmp/10;     
+                    }
+                bigint = tmp%10+bigint;
+            }
+                
+        }
+        return new BigInt(bigint);
+    }
 }
